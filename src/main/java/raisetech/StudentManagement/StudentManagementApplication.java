@@ -14,9 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class StudentManagementApplication {
 
-//  private String name = "Enami Kouji";
-//  private String age ="37";
-
   private Map<String, String> students = new HashMap<>();
 
   public StudentManagementApplication() {
@@ -42,7 +39,8 @@ public class StudentManagementApplication {
 
   }
 }
-
+//  private String name = "Enami Kouji";
+//  private String age ="37";
 //  public static void main(String[] args) {
 //    SpringApplication.run(StudentManagementApplication.class, args);
 //  }
