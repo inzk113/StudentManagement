@@ -27,6 +27,7 @@ public class StudentManagementApplication {
     SpringApplication.run(StudentManagementApplication.class, args);
   }
 
+
   @GetMapping("/students")
   public Map<String, String> getStudentInfo() {
     return students;
