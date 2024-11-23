@@ -21,7 +21,6 @@ public class StudentManagementApplication {
     students.put("27", "Mayu Inuzuka");
     students.put("30", "taro Yamada");
     students.put("25", "Hanako Sato");
-
   }
 
   public static void main(String[] args) {
