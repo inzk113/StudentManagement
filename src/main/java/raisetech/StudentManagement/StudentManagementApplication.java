@@ -16,17 +16,26 @@ import org.springframework.web.bind.annotation.RestController;
 public class StudentManagementApplication {
 
 
+
   @Autowired
   private StudentRepository repository;
 
+
+
+
   public static void main(String[] args) {
     SpringApplication.run(StudentManagementApplication.class, args);
+
+    System.out.println("こんにちは");
   }
+
 
   @GetMapping("/student")
   public String getStudent(@RequestParam String name) {
     Student student = repository.searchByName(name);
     return student.getName() + " " + student.getAge() + "歳";
+
+ 
   }
 
   @PostMapping("/student")
@@ -39,9 +48,11 @@ public class StudentManagementApplication {
     repository.updateStudent(name, age);
   }
 
+
   @DeleteMapping("/student")
   public void  deleteStudent(String name){
     repository.daleteStudent(name);
   }
 }
+
 
