@@ -12,6 +12,12 @@ java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(21)
     }
+
+    configurations {
+        compoleOnly {
+            extendsFrom annotationProcessor
+        }
+    }
 }
 
 repositories {
@@ -23,6 +29,10 @@ dependencies {//依存関係
 //	implementationは実際にプログラムを書くときに使う、実行でも使う
     //便利機能、ユーティリティ
     implementation 'org.apache.commons:commons-lang3:3.14.0'
+
+    //Lombok
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
 
     runtimeOnly 'com.mysql:mysql-connector-j'
 
