@@ -32,7 +32,7 @@ public class StudentService {
 
   public List<StudentsCourses> searchJavaCoursesList() {
 
-    List<StudentsCourses> searchStudentsCourses = repository.searchJavaCourses();
+    List<StudentsCourses> searchStudentsCourses = repository.searchStudentsCourses();
 
     return searchStudentsCourses.stream()
         .filter(course -> course.getCourseName() != null && course.getCourseName().toLowerCase()
@@ -42,7 +42,7 @@ public class StudentService {
   }
 
   public List<Students> search30sStudentsList() {
-    return repository.search30sStudents().stream()
+    return repository.searchStudent().stream()
         .filter(student -> student.getAge() >= 30 && student.getAge() <= 39).toList();
   }
 }
