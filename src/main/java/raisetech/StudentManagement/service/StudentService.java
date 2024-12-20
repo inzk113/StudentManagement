@@ -1,10 +1,9 @@
 package raisetech.StudentManagement.service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import raisetech.StudentManagement.data.Students;
+import raisetech.StudentManagement.data.Student;
 import raisetech.StudentManagement.data.StudentsCourses;
 import raisetech.StudentManagement.repository.StudentRepository;
 
@@ -19,7 +18,7 @@ public class StudentService {
 
   }
 
-  public List<Students> searchStudentList() {
+  public List<Student> searchStudentList() {
     repository.searchStudent();
 
     return repository.searchStudent();
@@ -29,21 +28,5 @@ public class StudentService {
     return repository.searchStudentsCourses();
   }
 
-
-  public List<StudentsCourses> searchJavaCoursesList() {
-
-    List<StudentsCourses> searchStudentsCourses = repository.searchStudentsCourses();
-
-    return searchStudentsCourses.stream()
-        .filter(course -> course.getCourseName() != null && course.getCourseName().toLowerCase()
-            .contains("java"))
-        .collect(Collectors.toList());
-
   }
-
-  public List<Students> search30sStudentsList() {
-    return repository.searchStudent().stream()
-        .filter(student -> student.getAge() >= 30 && student.getAge() <= 39).toList();
-  }
-}
 
