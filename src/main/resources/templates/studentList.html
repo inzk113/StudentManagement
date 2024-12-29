@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
   <title>受講生一覧</title>
 </head>
 <body>
 <h1>受講生一覧</h1>
+ <form th:action="@{/registerStudent}" th:object="${studentDetail}" method="get">
 <table border="1">
   <thead>
   <tr>
@@ -33,5 +35,6 @@
   </tr>
   </tbody>
 </table>
+ </form>
 </body>
 </html>
