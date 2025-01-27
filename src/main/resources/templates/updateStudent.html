@@ -44,7 +44,7 @@
 
       <label for="id"
              th:for="studentCourse.__${stat.index}__.id">受講コースID:</label>
-      <input type="text" id="courseId" th:id="studentCourse.__${stat.index}__.id"
+      <input type="text" id="studentId" th:id="studentCourse.__${stat.index}__.id"
              th:field="*{studentsCourses[__${stat.index}__].id}"/><br>
 
   </div>
