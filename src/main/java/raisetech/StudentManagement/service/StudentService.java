@@ -21,10 +21,9 @@ public class StudentService {
     this.repository = repository;
   }
 
-//  public List<Student> serchStudentList() {
-//    return repository.search();
-//  }
-
+  public List<Student> serchStudentList() {
+    return repository.search();
+  }
 
 
   public StudentDetail findStudentById(String id) {
@@ -37,9 +36,6 @@ public class StudentService {
     return studentDetail;
   }
 
-  public List<Student> serchStudentList() {
-    return repository.search();
-  }
 
   public List<StudentsCourses> searchStudentsCourseList() {
     return repository.searchStudentsCoursesList();

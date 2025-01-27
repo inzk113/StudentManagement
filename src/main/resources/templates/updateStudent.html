@@ -26,8 +26,8 @@
     <label for="city">地域:</label>
     <input type="text" id="city" th:field="*{student.city}" required/><br>
 
-    <label for="nickName">ニックネーム:</label>
-    <input type="text" id="nickName" th:field="*{student.nickName}" required/><br>
+    <label for="nick_name">ニックネーム:</label>
+    <input type="text" id="nick_name" th:field="*{student.nickName}" required/><br>
 
     <label for="gender">性別:</label>
     <input type="text" id="gender" th:field="*{student.gender}"/><br>
@@ -44,7 +44,7 @@
 
       <label for="id"
              th:for="studentCourse.__${stat.index}__.id">受講コースID:</label>
-      <input type="text" id="courseid" th:id="studentCourse.__${stat.index}__.id"
+      <input type="text" id="courseId" th:id="studentCourse.__${stat.index}__.id"
              th:field="*{studentsCourses[__${stat.index}__].id}"/><br>
 
   </div>
