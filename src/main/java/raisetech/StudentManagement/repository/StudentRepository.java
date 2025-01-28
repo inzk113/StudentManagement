@@ -27,7 +27,7 @@ public interface StudentRepository {
 
   //search()
   @Select("SELECT * FROM students WHERE id = #{id}")
-  Student searchstudent(String id);
+  Student searchStudent(String id);
 
   //serchstudent()
   @Select("SELECT * FROM students_courses")
