@@ -22,6 +22,7 @@ public interface StudentRepository {
    * 全件検索します。
    */
 
+
   @Select("SELECT * FROM students")
   List<Student> search();
 
@@ -66,9 +67,6 @@ public interface StudentRepository {
 //registerのコピペでいい　
 //studentListの名前のところに「エータグ」をやるとリンクができる
 //@GetMapping("/updateStudent)
-
-//受講生一覧の表で名前をクリックすると、その受講生のID情報に
-//もとづいたデータを表示できるようにしましょう
 
 
 
