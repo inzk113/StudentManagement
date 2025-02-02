@@ -23,7 +23,7 @@ public interface StudentRepository {
    */
 
 
-  @Select("SELECT * FROM students")
+  @Select("SELECT * FROM students WHERE is_deleted = false")
   List<Student> search();
 
   //search()
@@ -54,7 +54,7 @@ public interface StudentRepository {
 
   @Update(
       "UPDATE students SET name = #{name}, nick_name = #{nickName}, email = #{email}, city = #{city}, "
-          + "age = #{age}, gender = #{gender}, remark = #{remark} WHERE id = #{id}")
+          + "age = #{age}, gender = #{gender}, remark = #{remark},is_deleted=#{isDeleted} WHERE id = #{id}")
   void updateStudent(Student student);
 
 
