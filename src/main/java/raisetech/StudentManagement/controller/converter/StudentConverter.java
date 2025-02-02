@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Component;
 import raisetech.StudentManagement.data.Student;
 import raisetech.StudentManagement.data.StudentsCourses;
-import raisetech.StudentManagement.domein.StudentDetail;
+import raisetech.StudentManagement.domain.StudentDetail;
 
 @Component
 public class StudentConverter {
