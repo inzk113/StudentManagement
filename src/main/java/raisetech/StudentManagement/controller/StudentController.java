@@ -1,64 +1,58 @@
 package raisetech.StudentManagement.controller;
 
-import java.util.Arrays;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import raisetech.StudentManagement.controller.converter.StudentConverter;
-import raisetech.StudentManagement.data.Student;
-import raisetech.StudentManagement.data.StudentsCourses;
 import raisetech.StudentManagement.domain.StudentDetail;
 import raisetech.StudentManagement.service.StudentService;
 
+/**
+ * 受講生の検索や登録、更新などを行うREST　APIとして実行されるcontrollerです。
+ */
 @RestController
 public class StudentController {
 
   private StudentService service;
-  private StudentConverter converter;
 
 
   @Autowired
-  public StudentController(StudentService service, StudentConverter converter) {
-
+  public StudentController(StudentService service) {
     this.service = service;
-    this.converter = converter;
   }
 
+  /**
+   * 受講生一覧検索です 全件検索を行うので条件指定は行いません。
+   *
+   * @return　受講生一覧（全件）
+   */
 
   @GetMapping("/studentList")
   public List<StudentDetail> getStudentsList() {
-    List<Student> students = service.serchStudentList();
-    List<StudentsCourses> studentsCourses = service.searchStudentsCourseList();
-    return converter.convertStudentDetails(students, studentsCourses);
+    return service.serchStudentList();
   }
 
-  @GetMapping("/newStudent")
-  public String newStudent(Model model) {
-    StudentDetail studentDetail = new StudentDetail();
-    studentDetail.setStudentsCourses(Arrays.asList(new StudentsCourses()));
-    model.addAttribute("studentDetail", studentDetail);
-    return "registerStudent";
+  /**
+   * 受講生検索です。 IDに紐づく任意の受講生の情報を取得します。
+   *
+   * @param id 　受講生ID
+   * @return　受講生
+   */
+
+  @GetMapping("/student/{id}")
+  public StudentDetail getStudent(@PathVariable String id) {
+    return service.findStudentById(id);
   }
 
 
   @PostMapping("/registerStudent")
-  public ResponseEntity<String> registerStudent(@RequestBody StudentDetail studentDetail) {
-    service.registerStudent(studentDetail);
-    return ResponseEntity.ok("登録処理が完了しました！");
-  }
-
-
-  @GetMapping("/student/{id}")
-  public String getStudent(@PathVariable String id, Model model) {
-    StudentDetail studentDetail = service.findStudentById(id);
-    model.addAttribute("studentDetail", studentDetail);
-    return "updateStudent";
+  public ResponseEntity<StudentDetail> registerStudent(@RequestBody StudentDetail studentDetail) {
+    StudentDetail responseStudentDetail = service.registerStudent(studentDetail);
+    return ResponseEntity.ok(responseStudentDetail);
   }
 
 
@@ -68,3 +62,7 @@ public class StudentController {
     return ResponseEntity.ok("更新処理が完了しました！");
   }
 }
+
+//リファクタリングとは、ソフトウェア開発において、プログラムの動作を保ったままソースコードを改善する作業のこと
+//動きの担保ができたタイミングでリファクタリング
+//
