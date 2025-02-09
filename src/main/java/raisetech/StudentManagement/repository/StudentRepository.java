@@ -21,8 +21,6 @@ public interface StudentRepository {
    *
    * @return　受講生一覧（全件）
    */
-
-
   @Select("SELECT * FROM students WHERE is_deleted = false")
   List<Student> search();
 
@@ -32,8 +30,6 @@ public interface StudentRepository {
    * @param id 　受講生ID
    * @return　受講生
    */
-
-  //search()
   @Select("SELECT * FROM students WHERE id = #{id}")
   Student searchStudent(String id);
 
@@ -42,8 +38,6 @@ public interface StudentRepository {
    *
    * @return 受講生のコース情報（全件）
    */
-
-  //serchstudent()
   @Select("SELECT * FROM students_courses")
   List<StudentsCourses> searchStudentsCoursesList();
 
@@ -53,7 +47,6 @@ public interface StudentRepository {
    * @param studentId 　受講生ID
    * @return　受講生IDに紐づく受講生コース情報
    */
-
   @Select("SELECT * FROM students_courses WHERE student_id = #{studentId}")
   List<StudentsCourses> searchStudentsCourses(String studentId);
 

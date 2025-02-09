@@ -30,7 +30,6 @@ public class StudentController {
    *
    * @return　受講生一覧（全件）
    */
-
   @GetMapping("/studentList")
   public List<StudentDetail> getStudentsList() {
     return service.serchStudentList();
@@ -42,7 +41,6 @@ public class StudentController {
    * @param id 　受講生ID
    * @return　受講生
    */
-
   @GetMapping("/student/{id}")
   public StudentDetail getStudent(@PathVariable String id) {
     return service.findStudentById(id);

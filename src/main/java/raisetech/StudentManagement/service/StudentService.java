@@ -21,7 +21,6 @@ public class StudentService {
   /**
    * 受講生情報を取り扱うサービスです。 検索や登録・更新処理を行います。
    */
-
   @Autowired
   public StudentService(StudentRepository repository, StudentConverter converter) {
     this.repository = repository;
@@ -45,8 +44,6 @@ public class StudentService {
    * @param id 　受講生ID
    * @return　受講生
    */
-
-
   public StudentDetail findStudentById(String id) {
     Student student = repository.searchStudent(id);
     List<StudentsCourses> studentsCourses = repository.searchStudentsCourses(student.getId());
