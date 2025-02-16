@@ -51,12 +51,10 @@ public class StudentService {
   }
 
   /**
-   * 受講生詳細の登録を行います。
-   * 受講生と受講コース情報を個別に登録し、受講コース情報には受講生情報を紐づける値とコース開始日、コース終了日を設定します。
+   * 受講生詳細の登録を行います。 受講生と受講コース情報を個別に登録し、受講コース情報には受講生情報を紐づける値とコース開始日、コース終了日を設定します。
    *
-   * @param studentDetail　受講生詳細
+   * @param studentDetail 　受講生詳細
    * @return　登録情報を付与した受講生詳細
-   *
    */
   @Transactional
   public StudentDetail registerStudent(StudentDetail studentDetail) {
@@ -73,8 +71,8 @@ public class StudentService {
   /**
    * 受講生コース情報を登録する際の初期情報を設定する。
    *
-   * @param studentCourse　受講生コース情報
-   * @param student　受講生
+   * @param studentCourse 　受講生コース情報
+   * @param student       　受講生
    */
   private static void initStudentsCourse(StudentCourse studentCourse, Student student) {
     LocalDateTime now = LocalDateTime.now();
@@ -85,10 +83,9 @@ public class StudentService {
   }
 
   /**
-   * 受講生詳細の更新を行います。
-   * 受講生詳細と受講生コース情報をそれぞれ更新します。
+   * 受講生詳細の更新を行います。 受講生詳細と受講生コース情報をそれぞれ更新します。
    *
-   * @param studentDetail　受講生詳細
+   * @param studentDetail 　受講生詳細
    */
   @Transactional
   public void updateStudent(StudentDetail studentDetail) {
