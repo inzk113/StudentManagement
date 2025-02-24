@@ -1,6 +1,8 @@
 package raisetech.StudentManagement.controller;
 
-import jakarta.validation.constraints.Size;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import raisetech.StudentManagement.domain.StudentDetail;
+import raisetech.StudentManagement.exception.TestException;
 import raisetech.StudentManagement.service.StudentService;
 
 /**
@@ -35,8 +38,9 @@ public class StudentController {
    * @return　受講生詳細一覧（全件）
    */
   @GetMapping("/studentList")
-  public List<StudentDetail> getStudentsList() {
-    return service.serchStudentList();
+  public List<StudentDetail> getStudentsList() throws TestException {
+    throw new TestException
+        ("現在このAPIは利用できません。URLは「studentList」ではなく「students」を利用してください。");
   }
 
   /**
@@ -46,7 +50,7 @@ public class StudentController {
    * @return　受講生詳細
    */
   @GetMapping("/student/{id}")
-  public StudentDetail getStudent(@PathVariable @Size(min = 1, max = 3) String id) {
+  public StudentDetail getStudent(@PathVariable @NotBlank @Pattern(regexp = "^\\d+$") String id) {
     return service.findStudentById(id);
   }
 
@@ -57,7 +61,8 @@ public class StudentController {
    * @return　実行結果
    */
   @PostMapping("/registerStudent")
-  public ResponseEntity<StudentDetail> registerStudent(@RequestBody StudentDetail studentDetail) {
+  public ResponseEntity<StudentDetail> registerStudent
+  (@RequestBody @Valid StudentDetail studentDetail) {
     StudentDetail responseStudentDetail = service.registerStudent(studentDetail);
     return ResponseEntity.ok(responseStudentDetail);
   }
@@ -69,11 +74,19 @@ public class StudentController {
    * @return　実行結果
    */
   @PutMapping("/updateStudent")
-  public ResponseEntity<String> updateStudent(@RequestBody StudentDetail studentDetail) {
+  public ResponseEntity<String> updateStudent(@RequestBody @Valid StudentDetail studentDetail) {
     service.updateStudent(studentDetail);
     return ResponseEntity.ok("更新処理が完了しました！");
   }
 }
+
+//  @ExceptionHandler(TestException.class)
+//  public ResponseEntity<String> handleTestException(TestException ex) {
+//    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+//  }
+//}
+
+//ハンドラークラス
 
 //リファクタリングとは、ソフトウェア開発において、プログラムの動作を保ったままソースコードを改善する作業のこと
 //動きの担保ができたタイミングでリファクタリング
