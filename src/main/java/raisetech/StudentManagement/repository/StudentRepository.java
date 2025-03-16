@@ -71,4 +71,7 @@ public interface StudentRepository {
   void updateStudentCourse(StudentCourse studentCourse);
 }
 
-
+//課題２７回
+//レビューする人が理解できているとは限らない。
+//テストプログラムがないと何を基準にして何が大丈夫だったのかわからない。何をもって完了にしたのか。
+//
