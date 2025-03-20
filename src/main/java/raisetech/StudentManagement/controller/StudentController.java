@@ -50,7 +50,7 @@ public class StudentController {
 
   @GetMapping("/studentList")
   public List<StudentDetail> getStudentsList() {
-    return service.serchStudentList();
+    return service.searchStudentList();
   }
 
   /**

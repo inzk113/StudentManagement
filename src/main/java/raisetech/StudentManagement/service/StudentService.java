@@ -32,7 +32,7 @@ public class StudentService {
    *
    * @return　受講生一覧（全件）
    */
-  public List<StudentDetail> serchStudentList() {
+  public List<StudentDetail> searchStudentList() {
     List<Student> studentList = repository.search();
     List<StudentCourse> studentCourseList = repository.searchStudentCoursesList();
     return converter.convertStudentDetails(studentList, studentCourseList);
