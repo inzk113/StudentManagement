@@ -4,8 +4,10 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 import raisetech.StudentManagement.controller.converter.StudentConverter;
 import raisetech.StudentManagement.data.Student;
 import raisetech.StudentManagement.data.StudentCourse;
@@ -44,8 +46,12 @@ public class StudentService {
    * @param id 　受講生ID
    * @return　受講生詳細
    */
+
   public StudentDetail findStudentById(String id) {
     Student student = repository.searchStudent(id);
+    if (student == null) {
+      throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Student not found");
+    }
     List<StudentCourse> studentCourse = repository.searchStudentCourse(student.getId());
     return new StudentDetail(student, studentCourse);
   }
@@ -58,14 +64,19 @@ public class StudentService {
    */
   @Transactional
   public StudentDetail registerStudent(StudentDetail studentDetail) {
-    Student student = studentDetail.getStudent();
+    try {
+      Student student = studentDetail.getStudent();
 
-    repository.registerStudent(student);
-    studentDetail.getStudentCourseList().forEach(studentCourse -> {
-      initStudentsCourse(studentCourse, student);
-      repository.registerStudentCourse(studentCourse);
-    });
-    return studentDetail;
+      repository.registerStudent(student);
+      studentDetail.getStudentCourseList().forEach(studentCourse -> {
+        initStudentsCourse(studentCourse, student);
+        repository.registerStudentCourse(studentCourse);
+      });
+      return studentDetail;
+    } catch (Exception e) {
+      throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
+          "Student registration failed", e);
+    }
   }
 
   /**
@@ -94,3 +105,4 @@ public class StudentService {
         .forEach(studentCourse -> repository.updateStudentCourse(studentCourse));
   }
 }
+

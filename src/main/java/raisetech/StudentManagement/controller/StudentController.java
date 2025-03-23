@@ -11,6 +11,7 @@ import jakarta.validation.constraints.Pattern;
 import java.util.List;
 import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 import raisetech.StudentManagement.domain.StudentDetail;
 import raisetech.StudentManagement.service.StudentService;
 
@@ -71,8 +73,14 @@ public class StudentController {
   )
 
   @GetMapping("/student/{id}")
-  public StudentDetail getStudent(@PathVariable @NotBlank @Pattern(regexp = "^\\d+$") String id) {
-    return service.findStudentById(id);
+
+  public ResponseEntity<StudentDetail> getStudent(
+      @PathVariable @NotBlank @Pattern(regexp = "^\\d+$") String id) {
+    StudentDetail student = service.findStudentById(id);
+    if (student == null) {
+      throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Student not found");
+    }
+    return ResponseEntity.ok(student);
   }
 
   /**
@@ -94,6 +102,7 @@ public class StudentController {
     StudentDetail responseStudentDetail = service.registerStudent(studentDetail);
     return ResponseEntity.ok(responseStudentDetail);
   }
+
 
   /**
    * 受講生詳細の更新を行います。 キャンセルフラグの更新もここで行います。（論理削除）
@@ -118,4 +127,3 @@ public class StudentController {
   }
 }
 
-//
